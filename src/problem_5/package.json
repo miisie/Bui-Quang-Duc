@@ -1,0 +1,35 @@
+{
+  "name": "problem_5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --build",
+    "start:": "node ./dist/index.js",
+    "dev": "nodemon ./src/index.ts",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migration:generate": "npm run typeorm -- migration:generate -d ormconfig.ts",
+    "migration:run": "npm run typeorm -- migration:run -d ormconfig.ts",
+    "migration:revert": "npm run typeorm -- migration:revert -d ormconfig.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "http-status-codes": "^2.3.0",
+    "pg": "^8.13.1",
+    "tsyringe": "^4.8.0",
+    "typeorm": "^0.3.20",
+    "typeorm-naming-strategies": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "dotenv": "^16.4.7",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.3"
+  }
+}
