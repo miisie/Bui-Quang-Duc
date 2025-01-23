@@ -1,18 +1,45 @@
 import { Request, Response } from "express";
-import { inject, injectable } from "tsyringe";
 import { UserService } from "../services/users";
-import { StatusCodes } from 'http-status-codes';
+import { plainToClass, plainToInstance } from "class-transformer";
+import { CreateUserDto } from "../dtos/create-user.dto";
+import { UpdateUserDto } from "../dtos/update-user.dto";
 
-@injectable()
 export class UserController {
-    constructor(
-        @inject(UserService) private userService: UserService   
-    ) {}
+    private userService: UserService; 
+    constructor() {
+        this.userService = new UserService;
+    }
+
+    async getAllUsers(req: Request, res: Response) {
+        const page = parseInt(req.query.page as string) || 1;
+        const limit = parseInt(req.query.limit as string) || 5;
+        const data = await this.userService.getAllUsers(page, limit);
+        res.status(data.status).json(data);
+    }
 
     async getUserById(req: Request, res: Response) {
         const userId = req.params.id;
         const data = await this.userService.getUserById(userId);
-        return res.status(StatusCodes.OK).json(data);
-        // return res.status(StatusCodes.OK).json(userId);
+        res.status(data.status).json(data);
     }
+
+    async createUser(req: Request, res: Response) {
+        const userData = plainToClass(CreateUserDto, req.body);
+        const data = await this.userService.createUser(userData);
+        res.status(data.status).json(data);
+    }
+
+    async delUserById(req: Request, res: Response) {
+        const userId = req.params.id;
+        const data = await this.userService.delUserById(userId);
+        res.status(data.status).json(data);
+    }
+
+    async updUserById(req: Request, res: Response) {
+        const userId = req.params.id;
+        const updData = plainToClass(UpdateUserDto, req.body);
+        const data = await this.userService.updUserById(userId, updData);
+        res.status(data.status).json(data);
+    }
+    
 }

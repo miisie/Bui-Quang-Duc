@@ -1,17 +1,17 @@
 import { StatusCodes } from 'http-status-codes';
 
-export class SuccessReponse {
+export class DataReponse {
     private data: object;
-    private status: number;
+    status: number;
     private message: string;
 
     constructor(
         data = {},
         message = "",
-        statusCode = StatusCodes.OK,
+        statusCode: StatusCodes,
     ) {
-        this.message = message;
-        this.status = statusCode;
         this.data = data;
+        this.status = statusCode;
+        this.message = message;
     }
 }

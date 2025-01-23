@@ -8,6 +8,7 @@
     "build": "tsc --build",
     "start:": "node ./dist/index.js",
     "dev": "nodemon ./src/index.ts",
+    "seed": "ts-node database/seeds/users.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "migration:generate": "npm run typeorm -- migration:generate -d ormconfig.ts",
     "migration:run": "npm run typeorm -- migration:run -d ormconfig.ts",
@@ -17,10 +18,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@faker-js/faker": "^9.4.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "express": "^4.21.2",
     "http-status-codes": "^2.3.0",
     "pg": "^8.13.1",
-    "tsyringe": "^4.8.0",
     "typeorm": "^0.3.20",
     "typeorm-naming-strategies": "^4.1.0"
   },
