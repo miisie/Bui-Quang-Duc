@@ -14,9 +14,7 @@ const AppDataSource = new DataSource({
   entities: ['src/**/entities/*.ts'],
   migrations: ['database/migrations/*.ts'],
   synchronize: false,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl: false,
 
   namingStrategy: new SnakeNamingStrategy(),
 });
