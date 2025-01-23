@@ -78,9 +78,9 @@ export class UserService {
             return new DataReponse({}, `User with ID ${id} not found`, StatusCodes.NOT_FOUND);
         }
         
-        const userByEmail = await this.userRepository.getUserByEmail(data.email);
-        if(user.email != data.email && userByEmail) {
-            return new DataReponse({}, `Email ${data.email} is already exist`, StatusCodes.BAD_REQUEST);
+        if(data.email && user.email != data.email) {
+            const userByEmail = await this.userRepository.getUserByEmail(data.email);
+            if (userByEmail) return new DataReponse({}, `Email ${data.email} is already exist`, StatusCodes.BAD_REQUEST);
         }
 
         await this.userRepository.updUserById(id, data);
